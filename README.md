@@ -102,7 +102,7 @@ Plays a track or playlist in your default music player. Not working yet. Oops. :
 Allows you to set a rating to a track, and album, or whatever. Can't search through ratings yet. Oops. :P
 
 ~~~~
-rate [some query] <rating>
+rate [some query] <rating> #also not quite ready yet. Sorry.
 ~~~~
 
 ### config
