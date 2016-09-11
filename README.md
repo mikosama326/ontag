@@ -2,7 +2,7 @@
 
 This is a music library organization application that lets you apply freeform tags to each track. And then you can find tracks by tag. This application is written as a potential solution to the problem that every lover of non-mainstream music has faced.
 
-Especially written for otakus and by an otaku.
+Especially written for otakus by an otaku.
 
 Want an idea of how to use this?
 Well, suppose you want your music organized into some categories like 'Anime music', 'Anime OSTs', 'Game OSTs', 'Vocaloid', 'Doujin', 'Touhou'.
@@ -22,7 +22,7 @@ ontag list anime
 
 Want to find anime music that doesn't come under your OSTs?
 ~~~~
-ontag list anime '!ost' \# the way to specify an exclusion tag is '!'. I put the tag in single quotes to keep it from being interpreted by the shell
+ontag list anime '!ost' # the way to specify an exclusion tag is '!'. I put the tag in single quotes to keep it from being interpreted by the shell
 ~~~~
 
 Want to list all music that comes under doujin music?
@@ -33,7 +33,7 @@ ontag list doujin
 
 Want all doujin music other than vocaloid?
 ~~~~
-ontag list doujin '!vocaloid' \# haven't actually tested that this works yet. :P
+ontag list doujin '!vocaloid' # haven't actually tested that this works yet. :P
 ~~~~
 
 Want to make sure you get vocaloid music even if you search for 'ボーカロイド'?
@@ -43,6 +43,8 @@ ontag list ボーカロイド
 ~~~~
 
 *note: all tag matching is case-insensitive, but metadata search criteria is case-sensitive.*
+
+**Currently still in the alpha stage. Don't expect everything to work just yet.**
 
 Syntax:
 ~~~~
@@ -66,7 +68,7 @@ Deletes a file/folder from the database. Without arguments, it'll clear the whol
 Possible uses:
 ~~~~
 delete
-delete [query] //I haven't put in the proper search criteria yet.
+delete [query] #I haven't put in the proper search criteria yet. Oops. :P
 ~~~~
 
 ### list
@@ -134,7 +136,7 @@ then 'glitch-hop' is now under 'electro' and searches for 'electro' will also sh
 
 This will just simply look through the metadata of each track in the library and add the 'title', 'artist', and 'album' fields into tags. Might make things easier to search later.
 
-**Extra cool ideas on how to use Ontag:**
+**More cool ideas on how to use Ontag:**
 ~~~~
 ontag subtag human reol hanatan kradness
 ~~~~
@@ -154,14 +156,19 @@ ontag synonym "Ginsuke Rin" "Ocelot"
 git clone https://github.com/mikosama326/ontag.git
 ~~~~
 Or download it as a ZIP or whatever.
+
 2. Navigate into folder where setup.py is
+
 3. Install using setuptools
 ~~~~
 pip install .
 ~~~~
+
 Or whatever suits your fancy. I highly recommend using virtualenv: [https://virtualenv.pypa.io/en/stable/]
 4. You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output)
 
 ## Some output files you'll see:
 + musicdb.json : contains the actual database.
 + trimurthulu.txt : the config file.
+   - LIBPATH: default path to your music library
+   - That's all there is in here for now. Don't worry. I'll add stuff later.
