@@ -3,7 +3,7 @@ import os
 from readfiles import *
 
 # Warning! This is a repeat declaration. We need to eventually read this data from a file.
-library_path = './testLib'
+#library_path = './testLib'
 @click.group()
 @click.pass_context
 def cli(ctx):

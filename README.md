@@ -22,7 +22,7 @@ ontag list anime
 
 Want to find anime music that doesn't come under your OSTs?
 ~~~~
-ontag list anime '!ost'
+ontag list anime '!ost' \# the way to specify an exclusion tag is '!'. I put the tag in single quotes to keep it from being interpreted by the shell
 ~~~~
 
 Want to list all music that comes under doujin music?
@@ -33,7 +33,7 @@ ontag list doujin
 
 Want all doujin music other than vocaloid?
 ~~~~
-ontag list doujin '!vocaloid' //I haven't actually tested that this works yet. :P
+ontag list doujin '!vocaloid' \# haven't actually tested that this works yet. :P
 ~~~~
 
 Want to make sure you get vocaloid music even if you search for 'ボーカロイド'?
@@ -147,3 +147,21 @@ Find it annoying when the same artist goes by different names?
 ~~~~
 ontag synonym "Ginsuke Rin" "Ocelot"
 ~~~~
+
+## How to install:
+1. Clone the repo:
+~~~~
+git clone https://github.com/mikosama326/ontag.git
+~~~~
+Or download it as a ZIP or whatever.
+2. Navigate into folder where setup.py is
+3. Install using setuptools
+~~~~
+pip install .
+~~~~
+Or whatever suits your fancy. I highly recommend using virtualenv: [https://virtualenv.pypa.io/en/stable/]
+4. You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output)
+
+## Some output files you'll see:
++ musicdb.json : contains the actual database.
++ trimurthulu.txt : the config file.

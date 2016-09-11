@@ -4,8 +4,10 @@ import os
 import hashlib
 #import sys
 
+# WARNING : it is a HUGE mess in here. Proceed at your own risk.
+
 # some global variables we'll need
-library_path = './testLib' # Path to the music library we'll be working on
+#library_path = './testLib' # Path to the music library we'll be working on
 musicdb = 'musicdb.json' # Path to the database file used to store the database for our library
 supported_formats = ['.mp3','.wav','.ogg','.flac','wma','.m4a']
 # Okay, first we open up our database
