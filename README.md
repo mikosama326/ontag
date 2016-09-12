@@ -109,7 +109,7 @@ rate [some query] <rating> #also not quite ready yet. Sorry.
 Opens up the config file in your default text editor.
 
 Stuff you can configure at the moment:
-Library path: The path to the folder that contains all your music.
++ **Library path**: The path to the folder that contains all your music.
 
 ### synonym
 Allows you to add a synonym to a term. Like:
@@ -136,7 +136,7 @@ then 'glitch-hop' is now under 'electro' and searches for 'electro' will also sh
 
 This will just simply look through the metadata of each track in the library and add the 'title', 'artist', and 'album' fields into tags. Might make things easier to search later.
 
-**More cool ideas on how to use Ontag:**
+**More cool ideas on how to use 音Tag:**
 ~~~~
 ontag subtag human reol hanatan kradness
 ~~~~
@@ -168,7 +168,7 @@ Or whatever suits your fancy. I highly recommend using virtualenv: [https://virt
 4. You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output)
 
 ## Some output files you'll see:
-+ musicdb.json : contains the actual database.
-+ trimurthulu.txt : the config file.
++ **musicdb.json** : contains the actual database.
++ **trimurthulu.txt** : the config file.
    - LIBPATH: default path to your music library
    - That's all there is in here for now. Don't worry. I'll add stuff later.
