@@ -128,13 +128,12 @@ def isThisInHere(this,here):
         return True
 
 #omigawd such a bad design. what to do. -_\(0_0)/_-
-def searchByTag(title,artist,album,direct,fname,rating,fields,tags):
+def searchByTag(title,artist,album,direct,fname,rating,tags):
     results = MusicDB.search(Q.title.matches(title) & Q.artist.matches(artist) & Q.album.matches(album) & Q.path.matches(".*"+direct+".*") & Q.name.matches(".*"+fname+".*"));
+    whatWeFound = []
     tags = list(tags)
-    fields = fields.split(",")
-    didWeFindAny = False # just to check if we found even one
     for result in results:
-        #print "Checking this one:",result['title']
+        #print "Checking this one:",result['title'] #for debugging
         flag = True
         for tag in tags:
             tag = tag.lower()
@@ -151,10 +150,8 @@ def searchByTag(title,artist,album,direct,fname,rating,fields,tags):
                 flag = False
                 break
         if flag:
-            didWeFindAny = True
-            print formatTheseFields(result,fields)
-    if not didWeFindAny:
-        print "Oops, no results matching your query."
+            whatWeFound.append(result)
+    return whatWeFound
 
 def tagATrack(title,artist,album,direct,fname,tags,toRemove):
     results = MusicDB.search(Q.title.matches(title) & Q.artist.matches(artist) & Q.album.matches(album) & Q.path.matches(".*"+direct+".*") & Q.name.matches(".*"+fname+".*"));
@@ -173,44 +170,59 @@ def tagATrack(title,artist,album,direct,fname,tags,toRemove):
         MusicDB.update({'tags':result['tags']},Q.id == result['id'])
         print result['name'],"-",StringAList(result['tags'])
 
-def deleteAnEntry(query):
-    results = MusicDB.search(Q.name.matches(query))
+def deleteAnEntry(results):
     for result in results:
         print result['name']
     ans = raw_input("You're about to delete all these entries from the database. Are you okay with that?\n")
     while ans not in ['y','yes','no','n']:
         ans = raw_input("Possible answers: 'y', 'yes','n','no'")
-    if ans in ['y','yes']:
-        MusicDB.remove(Q.name.matches(query))
-        print 'deleting complete'
-    elif ans in ['n','no']:
+    if ans in ['n','no']:
         print 'Okay, not deleting.'
+        return
+    if ans in ['y','yes']:
+        for result in results:
+            MusicDB.remove(Q.id.matches(result['id']))
+        print 'deleting complete'
 
-def tagsyn(tag,synonyms):
+def tagsyn(tag,synonyms,toRemove):
     synonyms = list(synonyms)
     tag = tag.lower()
     for synonym in synonyms:
         synonym = synonym.lower()
         if SynTags.contains(Q.tag.matches(tag) & Q.synonym.matches(synonym)):
-            print tag,"<=>",synonym,"combination already exists."
+            if toRemove:
+                SynTags.remove(Q.tag.matches(tag) & Q.synonym.matches(synonym))
+                SynTags.remove(Q.tag.matches(synonym) & Q.synonym.matches(tag))
+                print "Removed",tag,"<=>",synonym,"relationship."
+            else:
+                print tag,"<=>",synonym,"combination already exists."
         else:
+            if toRemove:
+                print tag,"<=>",synonym,"combination doesn't exist to delete it."
+                return
             SynTags.insert({'tag':tag,'synonym':synonym})
             SynTags.insert({'tag':synonym,'synonym':tag})
             print "Inserted",synonym,"as synonym to",tag
 
-def tagsub(tag,subtags):
+def tagsub(tag,subtags,toRemove):
     subtags = list(subtags)
     tag = tag.lower()
     for subtag in subtags:
         subtag = subtag.lower()
         if SubTags.contains(Q.tag.matches(tag) & Q.subtag.matches(subtag)):
-            print tag,"->",subtag,"relationship already exists."
+            if toRemove:
+                SynTags.remove(Q.tag.matches(tag) & Q.subtag.matches(subtag))
+                print "Removed",tag,"->",subtag,"relationship."
+            else:
+                print tag,"->",subtag,"relationship already exists."
         else:
+            if toRemove:
+                print tag,"->",subtag,"relationship doesn't exist to delete it."
+                return
             SubTags.insert({'tag':tag,'subtag':subtag})
             print "Inserted",subtag,"as subtag to",tag
 
-def setrate(query,rate):
-    results = MusicDB.search(Q.name.matches(query));
+def setrate(results,rate):
     for result in results:
         MusicDB.update({'rating':rate},Q.id == result['id'])
         print "Changed rating of",result['title'],"to",rate
@@ -227,12 +239,12 @@ def buildPlaylist(results):
             print "Oops, looks like we couldn't read the metadata of this file: "+f
             print oops
             print "So we can't add this to the playlist. Sorry. :("
-
-        line1 = RECORD_MARKER + ":" + tag.duration + "," + result['title'] if result['title'] is not "" else result['name'] + "\n"
-        line2 = result['path'] + "\n"
+            continue
+        line1 = RECORD_MARKER + ":" + str(int(tag.duration)) + "," + result['title'] if result['title'] is not "" else result['name'] + "\n"
+        line2 = "\n" + result['path'] + "\n"
         totalentry = line1 + line2 + "\n"
         myplaylist = myplaylist + totalentry
-    play = open(TEMP_PLAYLIST_FILE,"r+")
-    play.write(myplaylist)
+    play = open(TEMP_PLAYLIST_FILE,"w+")
+    play.write(myplaylist.encode('utf8'))
     play.close()
     return TEMP_PLAYLIST_FILE

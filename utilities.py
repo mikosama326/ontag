@@ -7,9 +7,18 @@ def StringAList(list):
     yay += ']'
     return yay
 
+def printResults(results,fields):
+    if results == []:
+        print 'Oops no results matching your query'
+        return
+    for result in results:
+        print formatTheseFields(result,fields)
+
 def formatTheseFields(result,fields):
     toPrint = ""
+    fields = fields.split(',')
     for field in fields:
+        field = field.strip()
         if field != 'tags':
             toPrint += result[field]+" | "
         else:
