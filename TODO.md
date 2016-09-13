@@ -23,28 +23,22 @@ x Do we need to write meta tags as well? I don't think it'll be required... é€†ã
 Adds a file/folder into the database. Without arguments, it'll scan the default folder for files and add them.
 
 Or you could use it as:
-add <path to file/folder>
+add --path="<path to folder to add>"
 
 ## delete
 Deletes a file/folder from the database. Without arguments, it'll clear the whole database.
 
 Possible uses:
 delete
-delete <path to file/folder>
-delete where <search-criteria>
-delete --for-reals // to delete the actual file as well
+delete <search-criteria>
 
 ## list
 To search through the database. Short-form as ls.
 
-ls where <search-criteria>
+list <search-criteria>
 
 Possible uses:
-ls where Artist="" // Search through ID3 tags and such
-ls where <random-text> //matches in title, filename, or ID3 tags
-ls #thing //searches in hashtags
-ls --track //matches only Tracks
-ls --album //matches only Albums
+list [--artist=""] [--album=""] [--title=""] [--fname=""] [--direct=""] [--fields=""] [tags]
 
 **I'd like to see if we can color-code the output to make it legible.**
 **Also, some regex in there might be nice.**
@@ -53,8 +47,8 @@ ls --album //matches only Albums
 Add hashtags to an entity
 
 Uses:
-tag #tag1 #tag2 ... where <search-criteria>
-<search-criteria> works the same as the ones in ls.
+tag <search-criteria> tag1 tag2 ...
+<search-criteria> works the same as the ones in list.
 --remove: remove a tag
 
 ## play
@@ -71,8 +65,8 @@ play --recently-added //selects the most recently added tracks
 Allows you to set a rating to a track, and album, or whatever.
 
 Use:
-rate <number> <search-criteria>
-rate <number> current //rates the currently playing file
+rate <search-criteria> <number>
+rate --current <number>  //rates the currently playing file
 
 ## config
 Opens up the config file in your default text editor.
@@ -80,6 +74,7 @@ Opens up the config file in your default text editor.
 Stuff you can configure:
 Rating scale: 0 is unrated, 1 is lowest, and you can pick the highest value.
 Library path: The path to the folder that contains all your music.
+
 
 *Something I want to do: is to pipe the results of a search into another command.*
 

@@ -85,7 +85,7 @@ def tag(ctx,title,artist,album,direct,fname,remove,tags):
 @click.pass_context
 def play(ctx,title,artist,album,direct,fname,rating,tags):
     """To play a file(or multiple files)"""
-    print 'To play a file(or multiple files) from the library'
+    click.launch(buildPlaylist('...'))
 
 #set a rating to files in a search query
 @cli.command()

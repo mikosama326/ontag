@@ -214,3 +214,25 @@ def setrate(query,rate):
     for result in results:
         MusicDB.update({'rating':rate},Q.id == result['id'])
         print "Changed rating of",result['title'],"to",rate
+
+def buildPlaylist(results):
+    FORMAT_DESCRIPTOR = "#EXTM3U"
+    RECORD_MARKER = "#EXTINF"
+    TEMP_PLAYLIST_FILE = "myplaylist.m3u"
+    myplaylist = FORMAT_DESCRIPTOR + "\n"
+    for result in results:
+        try:
+            tag = TinyTag.get(result['path'])
+        except Exception as oops:
+            print "Oops, looks like we couldn't read the metadata of this file: "+f
+            print oops
+            print "So we can't add this to the playlist. Sorry. :("
+
+        line1 = RECORD_MARKER + ":" + tag.duration + "," + result['title'] if result['title'] is not "" else result['name'] + "\n"
+        line2 = result['path'] + "\n"
+        totalentry = line1 + line2 + "\n"
+        myplaylist = myplaylist + totalentry
+    play = open(TEMP_PLAYLIST_FILE,"r+")
+    play.write(myplaylist)
+    play.close()
+    return TEMP_PLAYLIST_FILE
