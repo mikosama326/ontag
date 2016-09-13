@@ -156,12 +156,15 @@ ontag synonym "Ginsuke Rin" "Ocelot"
 git clone https://github.com/mikosama326/ontag.git
 ~~~~
 Or download it as a ZIP or whatever.
+
 2. Navigate into folder where setup.py is
+
 3. Install using setuptools
 ~~~~
 pip install .
 ~~~~
 Or whatever suits your fancy. I highly recommend using virtualenv: [https://virtualenv.pypa.io/en/stable/]
+
 4. You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output)
 
 ## Some output files you'll see:
