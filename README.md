@@ -8,7 +8,7 @@ Especially written for otakus by an otaku.
 
 Well, maybe nothing.
 
-But I love music. And I love organizing things. And like most people who have a widely varied music collection, I have been faced with the connundrum of trying to have some semblance of order in my music collection. And it looks like I'm not alone in the specific situation I'm in; clearly this guy had it rough, too: [http://blog.pkh.me/p/15-the-music-classifying-nightmare.html]
+But I love music. And I love organizing things. And like most people who have a widely varied music collection, I have been faced with the connundrum of trying to have some semblance of order in my music collection. And it looks like I'm not alone in the specific situation I'm in; clearly this guy had it rough, too: http://blog.pkh.me/p/15-the-music-classifying-nightmare.html
 
 I know bro. I feel you.
 
@@ -104,7 +104,7 @@ ontag <command> [options] [args]
 ontag --help to display the help page.
 ~~~~
 Now what is this elusive **'search-criteria'** you see everywhere? Here you go: <br />
-*[--option="content" to search through file meta data]* When using multiple, they are ANDed.
+*[--option="content" to search through file meta data]* When using multiple, they are ANDed. <br />
 Options:
 ~~~~
 --title : title metadata
@@ -144,18 +144,6 @@ To search through the database.
 list [search-criteria] [--fields="comma-separated list of fields to display"] [tags to include/exclude]
 ~~~~
 
-Options (aka the "search-criteria" you see everywhere else):
-~~~~
---title
---artist
---album
---genre
---direct : directory to search in
---fname : filename to search for
---rating: minimum rating to search for
-~~~~
-*--rating doesn't work yet. Don't try it.*
-
 ### tag
 Add tags to an entity
 
@@ -169,7 +157,7 @@ tag [search-criteria] [tags to apply]
 ### play
 Builds an M3U playlist with the results of a search and plays it.
 
-Not much else right now. Check the TODO.md file to see some of the stuff it's supposed to be able to do.
+Not much else right now. Check back later.
 
 ### rate
 Allows you to set a rating to a track. There's no set scale to it, that's up to you. But it must be an integer.
@@ -184,6 +172,7 @@ Opens up the config file in your default text editor.
 Stuff you can configure at the moment:
 + **Library path** (LIBPATH): The path to the folder that contains all your music.
 + **Log file locations** (GOODLOG and BADLOG): the two files where all normal behavior and errors are recorded respectively
++ **Folders to ignore** (IGNORE): Folders to ignore while adding files to the library.
 
 ### synonym
 Allows you to add a synonym to a term. Like:
@@ -211,21 +200,25 @@ then 'glitch-hop' is now under 'electro' and searches for 'electro' will also sh
 This will just simply look through the metadata of each track in the library and add the 'title', 'artist', and 'album' fields into tags. Might make things easier to search later.
 
 ## How to install:
-+ Clone the repo:
+
+**Step 1:** Clone the repo:
 ~~~~
 git clone https://github.com/mikosama326/ontag.git
 ~~~~
 Or download it as a ZIP or whatever.
 
-+ Navigate into folder where setup.py is
+**Step 2:** Navigate into folder where 'setup.py' is.
 
-+ Install using setuptools
+**Step 3:** Install using setuptools.
 ~~~~
 pip install .
 ~~~~
 Or whatever suits your fancy. I highly recommend using virtualenv: [https://virtualenv.pypa.io/en/stable/]
 
-+ You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output)
+*You'll install Click (for the CLI), TinyTag (for track metadata reading), TinyDB (for the database), and Colorama (for the color-coded output). Trust me, it's a good idea to use virtualenv at this point.*
+
+**Step 4:** Change the config file LIBPATH.
+The config file is called 'trimurthulu.txt' at the moment. Anyone who knows Hindu mythology will get why. LIBPATH should be assigned to the default folder to look for your music library.
 
 ## Some output files you'll see:
 + **musicdb.json** : contains the actual database.
