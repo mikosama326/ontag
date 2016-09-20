@@ -2,3 +2,4 @@ LIBPATH:./AllTheMusic
 #LIBPATH:./testLib
 GOODLOG:WhatWentRight.txt
 BADLOG:WhatWentWrong.txt
+IGNORE: ./AllTheMusic/OldStuff
