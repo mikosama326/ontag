@@ -20,11 +20,17 @@ So after thinking, thinking and thinking some more, this is the solution I have 
 
 **Step 3:** Hierarchy. Organize your tags into a tree using 'is-a' relationships. For example, 'Hatsune Miku' 'is-a' 'Vocaloid'. So is 'Kagamine Rin'. Similarly, '花たん' is-a 'human'. I mean, her voice is godly. But that's besides the point. This is especially helpful for dealing with sub-genres. Yeah, I know. You're welcome.
 
-Ta da!! Now you can search for things like: *八王子 original* to get all original songs by 八王子P.
-Or try something like: *八王子 utau cover* to get all UTAU covers of songs by 八王子.
-Want remixes of music from Puella Magi Madoka Magika? Try *'madoka magika' remix*.
+Ta da!! Now you can search for things like:
+*'八王子' 'original'*
+to get all original songs by 八王子P.
+Or try something like:
+*'八王子' 'utau' 'cover'*
+to get all UTAU covers of songs by 八王子.
+Want remixes of music from Puella Magi Madoka Magika? Try *'madoka magika' 'remix'*.
 
 And so I have written this application, 音Tag, to do all this for you. Plus some extra cute stuff. For now, you'll have to create most of the tags and their relationships manually. But it's not that hard. Ganbare!
+
+## More use ideas (skip this if you're bored already)
 
 Okay, let's try this with some syntax.
 Suppose you want your music organized into some categories like 'Anime music', 'Anime OSTs', 'Game OSTs', 'Vocaloid', 'Doujin', 'Touhou'.
@@ -69,7 +75,27 @@ ontag list ボーカロイド
 
 *note: all tag matching is case-insensitive, but metadata search criteria is case-sensitive. Watch out.*
 
-**\*Currently still in the alpha stage. Don't expect everything to work just yet.***
+Try this:
+~~~~
+ontag subtag human reol hanatan kradness [more human vocalists]
+~~~~
+Want to find all human covers of a certain song?
+~~~~
+ontag list cover matryoshka human
+~~~~
+
+Find it annoying when the same artist goes by different names?
+~~~~
+ontag synonym "Ginsuke Rin" "Ocelot"
+~~~~
+
+Assign a language to each song.
+~~~
+ontag tag --direct="Japanese" japanese
+ontag synonym japanese 日本語
+~~~
+
+**\*Currently still in the alpha stage. Don't expect everything to work just yet.*** <br />
 *please don't kill me*
 
 Okay so the actual syntax:
@@ -77,7 +103,7 @@ Okay so the actual syntax:
 ontag <command> [options] [args]
 ontag --help to display the help page.
 ~~~~
-Now what is this elusive **'search-criteria'** you see everywhere? Here you go:
+Now what is this elusive **'search-criteria'** you see everywhere? Here you go: <br />
 *[--option="content" to search through file meta data]* When using multiple, they are ANDed.
 Options:
 ~~~~
@@ -89,7 +115,7 @@ Options:
 --fname : filename to search for
 --rating: minimum rating to search for
 ~~~~
-*--rating doesn't work yet. Don't try it.*
+*--rating doesn't work yet. Don't try it.* <br />
 *Oh, and you can use regular expressions in these.*
 
 ## Commands:
@@ -183,27 +209,6 @@ then 'glitch-hop' is now under 'electro' and searches for 'electro' will also sh
 ### autotag
 
 This will just simply look through the metadata of each track in the library and add the 'title', 'artist', and 'album' fields into tags. Might make things easier to search later.
-
-## More cool ideas on how to use 音Tag:
-Do this:
-~~~~
-ontag subtag human reol hanatan kradness [more human vocalists]
-~~~~
-Want to find all human covers of a certain song?
-~~~~
-ontag list cover matryoshka human
-~~~~
-
-Find it annoying when the same artist goes by different names?
-~~~~
-ontag synonym "Ginsuke Rin" "Ocelot"
-~~~~
-
-Assign a language to each song.
-~~~
-ontag tag --direct="Japanese" japanese
-ontag synonym japanese 日本語
-~~~
 
 ## How to install:
 + Clone the repo:
