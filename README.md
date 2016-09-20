@@ -20,12 +20,12 @@ So after thinking, thinking and thinking some more, this is the solution I have 
 
 **Step 3:** Hierarchy. Organize your tags into a tree using 'is-a' relationships. For example, 'Hatsune Miku' 'is-a' 'Vocaloid'. So is 'Kagamine Rin'. Similarly, '花たん' is-a 'human'. I mean, her voice is godly. But that's besides the point. This is especially helpful for dealing with sub-genres. Yeah, I know. You're welcome.
 
-Ta da!! Now you can search for things like:
-*'八王子' 'original'*
-to get all original songs by 八王子P.
-Or try something like:
-*'八王子' 'utau' 'cover'*
-to get all UTAU covers of songs by 八王子.
+Ta da!! Now you can search for things like: <br />
+*'八王子' 'original'* <br />
+to get all original songs by 八王子P.<br />
+Or try something like:<br />
+*'八王子' 'utau' 'cover'*<br />
+to get all UTAU covers of songs by 八王子.<br />
 Want remixes of music from Puella Magi Madoka Magika? Try *'madoka magika' 'remix'*.
 
 And so I have written this application, 音Tag, to do all this for you. Plus some extra cute stuff. For now, you'll have to create most of the tags and their relationships manually. But it's not that hard. Ganbare!

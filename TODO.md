@@ -19,6 +19,11 @@ x Do we need to write meta tags as well? I don't think it'll be required... é€†ã
 - Actually do some hash-y stuff that gives the hashtags its name
 - Fix those hash collisions. What the hell.
 - Fix the recursive walk function. It's doing some funky stuff.
+- allow search by format
+- Add a 'how this works' detailing the design for the application in README
+- Add a 'Who Am I' section in README
+- Write better help pages.
+- Test that this works on Windows.
 
 !!
 
