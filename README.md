@@ -19,21 +19,21 @@ Want to find all anime music?
 ~~~~
 ontag list anime
 ~~~~
-
-Want to find anime music that doesn't come under your OSTs?
+But this will give you both the anime music and the anime osts you set earlier.
+Want to find anime music that doesn't come under your OSTs? (Only Anime OSTs?)
 ~~~~
 ontag list anime '!ost' # the way to specify an exclusion tag is '!'. I put the tag in single quotes to keep it from being interpreted by the shell
 ~~~~
 
 Want to list all music that comes under doujin music?
 ~~~~
-ontag subtag doujin vocaloid touhou
+ontag subtag doujin vocaloid touhou #just as an example, since much of Vocaloid and Touhou is doujin
 ontag list doujin
 ~~~~
 
 Want all doujin music other than vocaloid?
 ~~~~
-ontag list doujin '!vocaloid' # haven't actually tested that this works yet. :P
+ontag list doujin '!vocaloid'
 ~~~~
 
 Want to make sure you get vocaloid music even if you search for 'ボーカロイド'?
@@ -44,7 +44,7 @@ ontag list ボーカロイド
 
 *note: all tag matching is case-insensitive, but metadata search criteria is case-sensitive.*
 
-**Currently still in the alpha stage. Don't expect everything to work just yet.**
+**\*Currently still in the alpha stage. Don't expect everything to work just yet.\***
 
 Syntax:
 ~~~~
@@ -59,16 +59,16 @@ Adds a file/folder into the database. Without arguments, it'll scan the default 
 
 Or you could use it as:
 ~~~~
-add --path='<path to file/folder>' [optional tags to apply while adding]
+add [--path='<path to file/folder>'] [optional tags to apply while adding]
 ~~~~
+*Warning: I haven't entirely tested how this thing behaves outside of the folder right above the set Music Library.*
 
 ### delete
 Deletes a file/folder from the database. Without arguments, it'll clear the whole database.
 
 Possible uses:
 ~~~~
-delete
-delete [query] #I haven't put in the proper search criteria yet. Oops. :P
+delete [search-criteria] #check 'list' for search-criteria
 ~~~~
 
 ### list
@@ -77,12 +77,13 @@ To search through the database.
 list [--option="content" to search through file meta data] [--fields="comma-separated list of fields to display"] [tags to include/exclude]
 ~~~~
 Options:
-~~~~
 --title
+~~~~
 --artist
 --album
 --direct : directory to search in
 --fname : filename to search for
+--rating: minimum rating to search for
 ~~~~
 ### tag
 Add tags to an entity
@@ -96,20 +97,21 @@ Options:
 Same as for 'list'
 
 ### play
-Plays a track or playlist in your default music player. Not working yet. Oops. :P
+Builds an M3U playlist with the results of a search and plays it.
 
 ### rate
-Allows you to set a rating to a track, and album, or whatever. Can't search through ratings yet. Oops. :P
+Allows you to set a rating to a track. There's no set scale to it, that's up to you. But it must be an integer.
 
 ~~~~
-rate [some query] <rating> #also not quite ready yet. Sorry.
+rate [search-criteria as in 'list'] <rating>
 ~~~~
 
 ### config
 Opens up the config file in your default text editor.
 
 Stuff you can configure at the moment:
-+ **Library path**: The path to the folder that contains all your music.
++ **Library path** (LIBPATH): The path to the folder that contains all your music.
++ **Log file locations** (GOODLOG and BADLOG): the two files where all normal behavior and errors are recorded respectively
 
 ### synonym
 Allows you to add a synonym to a term. Like:
@@ -136,9 +138,10 @@ then 'glitch-hop' is now under 'electro' and searches for 'electro' will also sh
 
 This will just simply look through the metadata of each track in the library and add the 'title', 'artist', and 'album' fields into tags. Might make things easier to search later.
 
-**More cool ideas on how to use 音Tag:**
+## More cool ideas on how to use 音Tag:**
+Do this:
 ~~~~
-ontag subtag human reol hanatan kradness
+ontag subtag human reol hanatan kradness [more human vocalists]
 ~~~~
 Want to find all human covers of a certain song?
 ~~~~

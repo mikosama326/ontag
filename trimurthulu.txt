@@ -1,4 +1,4 @@
-#LIBPATH:./AllTheMusic
-LIBPATH:./testLib
+LIBPATH:./AllTheMusic
+#LIBPATH:./testLib
 GOODLOG:WhatWentRight.txt
 BADLOG:WhatWentWrong.txt

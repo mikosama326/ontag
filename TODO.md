@@ -86,7 +86,7 @@ So that any searches that match the <new term> will also link to the original an
 Allows synonyms for tags, like:
 synonym #arrangecover #remix
 
---delete: delete the relationship
+--remove: delete the relationship
 
 ## subtag
 Allows you to attach a tag as a subtag of another. So if you say:
@@ -95,12 +95,28 @@ subtag electro glitch-hop
 
 then glitch-hop is now under electro and searches for #electro will also show results with the #glitch-hop tag.
 
---delete: delete the relationship
+--remove: delete the relationship
 
 ## similar
 Finds songs similar to a specific song.
 
 This needs some ML stuff. Do it later.
+
+## update
+
+To help deal with changes to the actual files in your database (like if you delete them, move them or change metadata.)
+
+## favorites
+
+Ontag will save your most used commands into a file so that you can hit them again without typing so much.
+Or you can manually save them. Especially the really long and complicated ones.
+
+On its own, it displays all your saved favorite commands.
+Then you can execute them with something like:
+ontag favorites 1
+ontag favorites 5
+
+Stuff like that.
 
 # Some notes over here
 

@@ -21,11 +21,15 @@ def cli(ctx):
 @click.pass_context
 def add(ctx,path,tags):
     """To add a song/folder into the library"""
+    badlog = open(ctx.obj['BADLOG'],"w+")
+    goodlog = open(ctx.obj['GOODLOG'],"w+")
     if path == "":
         #os.path.walk(str(ctx.obj['LIBPATH']),scanfiles,0)
-        addAllTheFiles(str(ctx.obj['LIBPATH']),tags)
+        addAllTheFiles(str(ctx.obj['LIBPATH']),tags,{'goodlog':goodlog,'badlog':badlog})
     else:
-        addAllTheFiles(path,tags)
+        addAllTheFiles(path,tags,{'goodlog':goodlog,'badlog':badlog})
+    badlog.close()
+    goodlog.close()
 
 #delete entries from the library
 @cli.command()
@@ -44,7 +48,6 @@ def delete(ctx,title,artist,album,direct,fname,fields,rating,tags):
     deleteAnEntry(results)
 
 #search through the database
-#add search by rating
 @cli.command()
 @click.option('--title',required=False,default=".*",help="song title (file meta info)")
 @click.option('--artist',required=False,default=".*",help="song artist (file meta info)")
@@ -68,11 +71,17 @@ def list(ctx,title,artist,album,direct,fname,fields,rating,tags):
 @click.option('--direct',required=False,default=".*",help="directory to look in")
 @click.option('--fname',required=False,default=".*",help="file name")
 @click.option('--remove',required=False,default=False,is_flag=True,help="set if you want to remove tags")
-@click.argument('tags',required=True,nargs=-1)
+@click.argument('addtags',required=False,nargs=-1)
 @click.pass_context
-def tag(ctx,title,artist,album,direct,fname,remove,tags):
+def tag(ctx,title,artist,album,direct,fname,remove,addtags):
     """To tag a file in the library. Options support regex."""
-    tagATrack(title,artist,album,direct,fname,tags,remove)
+    #print "TAGGING"
+    badlog = open(ctx.obj['BADLOG'],"w+")
+    goodlog = open(ctx.obj['GOODLOG'],"w+")
+    #print "OPENED LOG FILE IN TAG"
+    tagATrack(title,artist,album,direct,fname,addtags,remove,{'goodlog':goodlog,'badlog':badlog})
+    badlog.close()
+    goodlog.close()
 
 #play files in a search query
 @cli.command()
@@ -132,9 +141,34 @@ def subtag(ctx,remove,tag,subtags):
 
 #autotag based on metadata
 @cli.command()
-def autotag():
+@click.pass_context
+def autotag(ctx):
     """Automatically tags the files based on track metadata"""
-    makeMyLifeEasy()
+    badlog = open(ctx.obj['BADLOG'],"w+")
+    goodlog = open(ctx.obj['GOODLOG'],"w+")
+    makeMyLifeEasy({'goodlog':goodlog,'badlog':badlog})
+    badlog.close()
+    goodlog.close()
+
+@cli.command()
+def update():
+    """
+    **Still under construction.**\n
+    This is to help you update the content of files that you might have recently changed in your database.
+    """
+    print '**Still under construction.**'
+    print 'This is to help you update the content of files that you might have recently changed in your database.'
+
+@cli.command()
+def similar():
+    """
+    **Still under construction.**\n
+    This is to help you find songs similar to a particular one. I'm not quite sure how you're going to specify the seed song.\n
+    But I'll work on that.
+    """
+    print '**Still under construction.**'
+    print "This is to help you find songs similar to a particular one. I'm not quite sure how you're going to specify the seed song. "
+    print "But I'll work on that."
 
 if __name__ == '__main__':
     cli(obj={})

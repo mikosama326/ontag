@@ -1,10 +1,12 @@
 
 def StringAList(list):
+    if list == []:
+        return '[]'
     yay =  '['
     for thing in list:
         yay += thing+'|'
-    yay = yay[:len(yay)-1]
-    yay += ']'
+    yay = yay[:-1]
+    yay = yay + ']'
     return yay
 
 def printResults(results,fields):
