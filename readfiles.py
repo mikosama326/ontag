@@ -179,7 +179,6 @@ def searchByTag(title,artist,album,direct,fname,rating,tags):
 
 def tagATrack(title,artist,album,direct,fname,tags,toRemove,log):
     results = MusicDB.search(Q.title.matches(title) & Q.artist.matches(artist) & Q.album.matches(album) & Q.path.matches(".*"+direct+".*") & Q.name.matches(".*"+fname+".*"));
-    #print "GOT RESULTS IN TAG"
     if results == []:
         print "Oops no tracks matching your query."
         return

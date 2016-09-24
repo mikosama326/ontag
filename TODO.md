@@ -24,6 +24,8 @@ x Do we need to write meta tags as well? I don't think it'll be required... é€†ã
 - Add a 'Who Am I' section in README
 - Write better help pages.
 - Test that this works on Windows.
+- Create a trello board for features
+- more stuff from here: http://blog.pkh.me/p/15-the-music-classifying-nightmare.html
 
 !!
 

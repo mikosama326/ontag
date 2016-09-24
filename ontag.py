@@ -140,6 +140,7 @@ def subtag(ctx,remove,tag,subtags):
     tagsub(tag,subtags,remove)
 
 #autotag based on metadata
+#Allow to take a 'rules file'
 @cli.command()
 @click.pass_context
 def autotag(ctx):
